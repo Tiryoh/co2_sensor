@@ -34,12 +34,16 @@ class MHZ14A():
             raise Exception("checksum: " + hex(checksum))
 
     def get_ppm(self):
+        if not self.serial.isOpen():
+            self.serial.open()
         return self.__get_data()
 
     def get(self):
-        return {
+        result = {
             "ppm": self.get_ppm(),
         }
+        self.close()
+        return result
 
     def close(self):
         try:
