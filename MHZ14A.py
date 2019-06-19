@@ -23,7 +23,7 @@ class MHZ14A():
     def set_zero(self):
         self.serial.write(bytearray(MHZ14A.ZERO))
 
-    def __get_data(self):
+    def __read_data(self):
         self.serial.write(bytearray(MHZ14A.PACKET))
         res = self.serial.read(size=9)
         res = bytearray(res)
@@ -33,20 +33,15 @@ class MHZ14A():
         else:
             raise Exception("checksum: " + hex(checksum))
 
-    def get_ppm(self):
-        if not self.serial.isOpen():
-            self.serial.open()
-        return self.__get_data()
-
-    def get(self):
-        result = {
-            "co2": self.get_ppm(),
-        }
-        self.close()
-        return result
-
-    def close(self):
+    def __close(self):
         try:
             self.serial.close()
         except AttributeError as e:
             print(e)
+
+    def read(self):
+        if not self.serial.isOpen():
+            self.serial.open()
+        co2_concentration = int(self.__read_data())
+        self.__close()
+        return co2_concentration
