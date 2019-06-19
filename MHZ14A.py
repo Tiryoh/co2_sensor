@@ -5,8 +5,8 @@
 
 # This script is based on https://qiita.com/watiko/items/5cfa2aedd5a67619add0
 
-import rospy
 import serial
+import time
 
 
 class MHZ14A():
@@ -16,9 +16,9 @@ class MHZ14A():
     def __init__(self, port, baud=9600, timeout=1):
         try:
             self.serial = serial.Serial(port, baud, timeout=timeout)
-            rospy.sleep(2)
+            time.sleep(2)
         except serial.serialutil.SerialException as e:
-            rospy.logerr(e)
+            print(e)
 
     def set_zero(self):
         self.serial.write(bytearray(MHZ14A.ZERO))
@@ -45,4 +45,4 @@ class MHZ14A():
         try:
             self.serial.close()
         except AttributeError as e:
-            rospy.logerr(e)
+            print(e)
