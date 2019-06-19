@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# MIT License 2019 (C) Tiryoh<tiryoh@gmail.com>
+# MIT License (C) 2019 Tiryoh<tiryoh@gmail.com>
 
 # This script is based on https://qiita.com/watiko/items/5cfa2aedd5a67619add0
 
