@@ -40,7 +40,7 @@ class MHZ14A():
 
     def get(self):
         result = {
-            "ppm": self.get_ppm(),
+            "co2": self.get_ppm(),
         }
         self.close()
         return result
